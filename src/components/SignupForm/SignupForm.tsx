@@ -38,7 +38,7 @@ function SignupForm({ handleSubmitForm, handleChangeForm, error }: Props) {
           label="email"
           placeholder="email"
           fullWidth
-          color={error.emailErrorMessage ? 'warning' : 'primary'}
+          error={!!error.emailErrorMessage}
         />
         <ErrorMessage>{error.emailErrorMessage}</ErrorMessage>
       </InputContainer>
@@ -51,7 +51,7 @@ function SignupForm({ handleSubmitForm, handleChangeForm, error }: Props) {
           label="Password"
           type="password"
           fullWidth
-          color={error.passwordErrorMessage ? 'warning' : 'primary'}
+          error={!!error.passwordErrorMessage}
         />
         <ErrorMessage>{error.passwordErrorMessage}</ErrorMessage>
       </InputContainer>
@@ -64,7 +64,7 @@ function SignupForm({ handleSubmitForm, handleChangeForm, error }: Props) {
           label="PasswordConfirm"
           type="password"
           fullWidth
-          color={error.passwordConfirmErrorMessage ? 'warning' : 'primary'}
+          error={!!error.passwordConfirmErrorMessage}
         />
         <ErrorMessage>{error.passwordConfirmErrorMessage}</ErrorMessage>
       </InputContainer>
@@ -72,7 +72,11 @@ function SignupForm({ handleSubmitForm, handleChangeForm, error }: Props) {
         type="submit"
         variant="outlined"
         name="submit"
-        disabled={false}
+        disabled={
+          error.emailErrorMessage !== null ||
+          error.passwordErrorMessage !== null ||
+          error.passwordConfirmErrorMessage !== null
+        }
         disableElevation
       >
         가입하기
