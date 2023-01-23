@@ -17,9 +17,9 @@ const ERROR_MESSAGE = {
 
 function Signup() {
   const [signupFieldErrorMessage, setSignupFieldErrorMessage] = useState<SignupFieldError>({
-    emailErrorMessage: null,
-    passwordErrorMessage: null,
-    passwordConfirmErrorMessage: null,
+    emailErrorMessage: '',
+    passwordErrorMessage: '',
+    passwordConfirmErrorMessage: '',
   });
 
   const checkEmailErrorMessage = (email: string) => {
@@ -37,16 +37,30 @@ function Signup() {
     password: string,
     passwordConfirm: string
   ): { passwordErrorMessage: string | null; passwordConfirmErrorMessage: string | null } => {
-    if (0 < password.length && password.length < 8 && !passwordConfirm)
+    const MIN_PASSWORD_LENGTH = 8;
+
+    if (0 < password.length && password.length < MIN_PASSWORD_LENGTH) {
       return {
         passwordErrorMessage: '8자리 이상 입력해주세요',
         passwordConfirmErrorMessage: null,
       };
+    }
 
-    if (passwordConfirm.length > 0 && password !== passwordConfirm) {
+    if (
+      password.length >= MIN_PASSWORD_LENGTH &&
+      passwordConfirm.length > 0 &&
+      password !== passwordConfirm
+    ) {
       return {
         passwordErrorMessage: '동일한 비밀번호를 입력해주세요.',
         passwordConfirmErrorMessage: '동일한 비밀번호를 입력해주세요.',
+      };
+    }
+
+    if (password.length === 0 || passwordConfirm.length === 0) {
+      return {
+        passwordErrorMessage: '',
+        passwordConfirmErrorMessage: '',
       };
     }
 
