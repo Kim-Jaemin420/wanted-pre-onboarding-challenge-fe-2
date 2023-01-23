@@ -35,7 +35,7 @@ function SignupForm({ handleSubmitForm, handleChangeForm, error }: Props) {
           variant="outlined"
           id="email"
           name="emailField"
-          label="Required"
+          label="email"
           placeholder="email"
           fullWidth
           color={error.emailErrorMessage ? 'warning' : 'primary'}
