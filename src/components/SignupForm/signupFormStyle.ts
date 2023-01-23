@@ -8,7 +8,6 @@ export const InputContainer = styled.div`
 export const SubmitButton = styled(Button)`
   width: 100%;
   font-size: 18px;
-  margin-top: 25px;
 `;
 
 export const ErrorMessage = styled.span`
