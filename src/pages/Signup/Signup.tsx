@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { AxiosError } from 'axios';
 import { css } from '@emotion/react';
+import { signup } from '@/apis';
 import { SignupForm } from '@/components/index';
+import { setLocalStorage } from '@/utils';
 import { SignupFieldError } from '@/types';
+import { HTTP_ERRORS } from '@/consts';
 
 const ERROR_TYPE = {
   INVALID_EMAIL: 'invalidEmail',
@@ -70,16 +74,31 @@ function Signup() {
     };
   };
 
-  const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const { emailField, passwordField, passwordConfirmField } = event.currentTarget;
+    const { emailField, passwordField } = event.currentTarget;
 
     const email = emailField.value;
     const password = passwordField.value;
-    const passwordConfirm = passwordConfirmField.value;
 
-    console.log(emailField.value, passwordField.value, passwordConfirmField);
+    try {
+      const {
+        data: { message, token },
+      } = await signup({ email, password });
+
+      await setLocalStorage('token', token);
+
+      alert(message);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response?.status === HTTP_ERRORS.CONFLICT) {
+          alert(error.response.data.details);
+        }
+
+        console.error(error);
+      }
+    }
   };
 
   const handleChangeForm = (event: React.FormEvent<HTMLFormElement>) => {
