@@ -10,8 +10,6 @@ interface Props {
 }
 
 function SignupForm({ handleSubmitForm, handleChangeForm, error }: Props) {
-  console.log(error);
-
   return (
     <form
       css={css`
