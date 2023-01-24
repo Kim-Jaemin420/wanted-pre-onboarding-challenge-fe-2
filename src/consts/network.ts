@@ -19,3 +19,5 @@ export const HTTP_ERRORS = {
   NOT_IMPLEMENTED: 501,
   BAD_GATEWAY: 502,
 };
+
+export const ACCESS_TOKEN = 'ACCESS_TOKEN';
