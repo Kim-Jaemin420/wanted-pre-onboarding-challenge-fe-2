@@ -5,7 +5,7 @@ import { signup } from '@/apis';
 import { SignupForm } from '@/components/index';
 import { setLocalStorage } from '@/utils';
 import { SignupFieldError } from '@/types';
-import { HTTP_ERRORS } from '@/consts';
+import { ACCESS_TOKEN, HTTP_ERRORS } from '@/consts';
 
 const ERROR_TYPE = {
   INVALID_EMAIL: 'invalidEmail',
@@ -87,7 +87,7 @@ function Signup() {
         data: { message, token },
       } = await signup({ email, password });
 
-      await setLocalStorage('token', token);
+      await setLocalStorage(ACCESS_TOKEN, token);
 
       alert(message);
     } catch (error) {
