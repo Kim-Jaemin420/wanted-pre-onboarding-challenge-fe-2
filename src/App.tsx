@@ -1,18 +1,48 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ReactNode, useContext } from 'react';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { AuthContext } from './context';
 import { Signin, Signup } from './pages';
-import Todos from './pages/Todos/Todos';
+import { PAGE_ROUTE } from './consts';
+
+const RequiredAuth = ({
+  children,
+  hasToken,
+  to = PAGE_ROUTE.SIGNIN,
+}: {
+  children: ReactNode;
+  hasToken: boolean;
+  to: ValueOf<typeof PAGE_ROUTE>;
+}) => {
+  if (!hasToken) {
+    return <Navigate to={to} />;
+  }
+  return <>{children}</>;
+};
 
 function App() {
+  const { token } = useContext(AuthContext);
+
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Todos />} />
-          <Route path="/auth/signin" element={<Signin />} />
-          <Route path="/auth/signup" element={<Signup />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path={PAGE_ROUTE.SIGNIN}
+          element={
+            <RequiredAuth hasToken={!token} to={PAGE_ROUTE.HOME}>
+              <Signin />
+            </RequiredAuth>
+          }
+        />
+        <Route
+          path={PAGE_ROUTE.SIGNUP}
+          element={
+            <RequiredAuth hasToken={!token} to={PAGE_ROUTE.HOME}>
+              <Signup />
+            </RequiredAuth>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
