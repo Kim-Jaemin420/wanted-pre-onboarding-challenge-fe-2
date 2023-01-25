@@ -12,7 +12,7 @@ interface Props {
   children: ReactNode;
 }
 
-const AuthContext = createContext<AuthState | undefined>({
+const AuthContext = createContext<AuthState>({
   token: null,
   setToken: (token: string) => {},
   removeToken: () => {},
