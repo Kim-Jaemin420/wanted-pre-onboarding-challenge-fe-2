@@ -6,3 +6,9 @@ export const signup = ({ email, password }: User) =>
     url: '/users/create',
     data: { email, password },
   });
+
+export const signin = ({ email, password }: User) =>
+  api.post({
+    url: '/users/login',
+    data: { email, password },
+  });
