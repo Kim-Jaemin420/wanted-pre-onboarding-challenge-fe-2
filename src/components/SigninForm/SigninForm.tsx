@@ -1,20 +1,36 @@
+import { css } from '@emotion/react';
 import { TextField } from '@mui/material';
 import { InputContainer, SubmitButton } from './signinFormStyle';
 
 interface Props {
-  handleSubmit: React.FormEventHandler<HTMLFormElement>;
+  handleChangeForm: React.FormEventHandler<HTMLFormElement>;
+  handleSubmitForm: React.FormEventHandler<HTMLFormElement>;
 }
 
-function SigninForm({ handleSubmit }: Props) {
+function SigninForm({ handleChangeForm, handleSubmitForm }: Props) {
   return (
-    <form onSubmit={handleSubmit}>
-      <legend>로그인 하기</legend>
+    <form
+      css={css`
+        width: 600px;
+      `}
+      onChange={handleChangeForm}
+      onSubmit={handleSubmitForm}
+    >
+      <legend
+        css={css`
+          font-size: 18px;
+          margin-bottom: 20px;
+          text-align: center;
+        `}
+      >
+        로그인 하기
+      </legend>
       <InputContainer>
         <TextField
           required
           variant="outlined"
           id="email"
-          name="emailField"
+          name="email"
           label="email"
           placeholder="email"
           fullWidth
@@ -25,7 +41,7 @@ function SigninForm({ handleSubmit }: Props) {
           required
           variant="outlined"
           id="password"
-          name="passwordField"
+          name="password"
           label="Password"
           type="password"
           fullWidth
