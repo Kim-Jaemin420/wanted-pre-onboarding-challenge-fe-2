@@ -9,3 +9,9 @@ export const SubmitButton = styled(Button)`
   width: 100%;
   font-size: 18px;
 `;
+
+export const ErrorMessage = styled.span`
+  font-size: 10px;
+  color: red;
+  margin-bottom: 10px;
+`;
