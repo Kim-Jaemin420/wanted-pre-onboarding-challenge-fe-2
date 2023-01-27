@@ -32,7 +32,7 @@ function SignupForm({ handleSubmitForm, handleChangeForm, error }: Props) {
           required
           variant="outlined"
           id="email"
-          name="emailField"
+          name="email"
           label="email"
           placeholder="email"
           fullWidth
@@ -45,7 +45,7 @@ function SignupForm({ handleSubmitForm, handleChangeForm, error }: Props) {
           required
           variant="outlined"
           id="password"
-          name="passwordField"
+          name="password"
           label="Password"
           type="password"
           fullWidth
@@ -58,7 +58,7 @@ function SignupForm({ handleSubmitForm, handleChangeForm, error }: Props) {
           required
           variant="outlined"
           id="passwordConfirm"
-          name="passwordConfirmField"
+          name="passwordConfirm"
           label="PasswordConfirm"
           type="password"
           fullWidth
