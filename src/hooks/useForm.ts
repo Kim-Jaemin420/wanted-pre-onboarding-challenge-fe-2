@@ -9,7 +9,7 @@ interface Props {
 
 function useForm({ initialFormValues, submittingFunction }: Props) {
   const [formInputValues, setFormInputValues] = useState(initialFormValues);
-  const [errors, setErrors] = useState<AuthError>({});
+  const [errors, setErrors] = useState<AuthError>(initialFormValues);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -26,14 +26,14 @@ function useForm({ initialFormValues, submittingFunction }: Props) {
     const target = event.target as HTMLInputElement;
 
     setFormInputValues((previousValues) => ({ ...previousValues, [target.name]: target.value }));
-    setErrors(validateForm(formInputValues));
+    setErrors(validateForm(formInputValues, errors, target.name));
   };
 
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setIsSubmitting(true);
-    setErrors(validateForm(formInputValues));
+    setErrors(validateForm(formInputValues, errors));
   };
 
   return { formInputValues, errors, handleChangeForm, handleSubmitForm };
