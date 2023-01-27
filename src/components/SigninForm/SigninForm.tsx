@@ -1,13 +1,15 @@
 import { css } from '@emotion/react';
 import { TextField } from '@mui/material';
-import { InputContainer, SubmitButton } from './signinFormStyle';
+import { AuthError } from '@/types';
+import { InputContainer, SubmitButton, ErrorMessage } from './signinFormStyle';
 
 interface Props {
   handleChangeForm: React.FormEventHandler<HTMLFormElement>;
   handleSubmitForm: React.FormEventHandler<HTMLFormElement>;
+  errors: AuthError;
 }
 
-function SigninForm({ handleChangeForm, handleSubmitForm }: Props) {
+function SigninForm({ handleChangeForm, handleSubmitForm, errors }: Props) {
   return (
     <form
       css={css`
@@ -34,7 +36,9 @@ function SigninForm({ handleChangeForm, handleSubmitForm }: Props) {
           label="email"
           placeholder="email"
           fullWidth
+          error={!!errors.email}
         />
+        <ErrorMessage>{errors.email}</ErrorMessage>
       </InputContainer>
       <InputContainer>
         <TextField
@@ -45,9 +49,15 @@ function SigninForm({ handleChangeForm, handleSubmitForm }: Props) {
           label="Password"
           type="password"
           fullWidth
+          error={!!errors.password}
         />
+        <ErrorMessage>{errors.password}</ErrorMessage>
       </InputContainer>
-      <SubmitButton type="submit" variant="outlined">
+      <SubmitButton
+        type="submit"
+        variant="outlined"
+        disabled={typeof errors.email === 'string' || typeof errors.password === 'string'}
+      >
         로그인
       </SubmitButton>
     </form>
