@@ -17,18 +17,18 @@ const validateEmail = (email: string, errors: AuthError) => {
 const validatePasswords = (password: string, errors: AuthError, passwordConfirm?: string) => {
   const MINIMUM_PASSWORD_LENGTH = 8;
 
-  if (password.length === 0) {
-    errors.password = '비밀번호를 입력해주세요.';
-    return errors;
-  }
-
-  if (0 <= password.length && password.length < MINIMUM_PASSWORD_LENGTH) {
-    errors.password = '비밀번호는 8자리 이상 입력해주세요.';
-    return errors;
-  }
+  if (password.length >= MINIMUM_PASSWORD_LENGTH) delete errors.password;
 
   if (passwordConfirm && password !== passwordConfirm) {
+    if (password && password.length < MINIMUM_PASSWORD_LENGTH)
+      errors.password = '비밀번호는 8자리 이상 입력해주세요.';
+
     errors.passwordConfirm = '비밀번호가 일치하지 않습니다.';
+    return errors;
+  }
+
+  if (password.length < MINIMUM_PASSWORD_LENGTH) {
+    errors.password = '비밀번호는 8자리 이상 입력해주세요.';
     return errors;
   }
 
