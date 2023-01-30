@@ -27,12 +27,8 @@ const validatePasswords = (password: string, errors: AuthError, passwordConfirm?
     return errors;
   }
 
-  if (
-    passwordConfirm &&
-    0 <= passwordConfirm.length &&
-    passwordConfirm.length < MINIMUM_PASSWORD_LENGTH
-  ) {
-    errors.passwordConfirm = '비밀번호는 8자리 이상 입력해주세요.';
+  if (passwordConfirm && password !== passwordConfirm) {
+    errors.passwordConfirm = '비밀번호가 일치하지 않습니다.';
     return errors;
   }
 
