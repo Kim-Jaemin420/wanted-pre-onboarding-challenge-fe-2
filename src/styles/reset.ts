@@ -1,6 +1,17 @@
 import { css } from '@emotion/react';
 
 const reset = css`
+  html {
+    /* 1rem = 10px */
+    font-size: 62.5%;
+  }
+
+  * {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+
   html,
   body,
   div,
@@ -82,14 +93,13 @@ const reset = css`
   mark,
   audio,
   video {
+    border: 0;
     margin: 0;
     padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
   }
 
+  /* HTML5 display-role reset for older browsers */
   article,
   aside,
   details,
@@ -103,27 +113,70 @@ const reset = css`
   section {
     display: block;
   }
-  body {
-    line-height: 1;
-  }
+
   ol,
   ul {
     list-style: none;
   }
+
   blockquote,
   q {
     quotes: none;
   }
-  blockquote:before,
-  blockquote:after,
-  q:before,
-  q:after {
+
+  blockquote::before,
+  blockquote::after,
+  q::before,
+  q::after {
     content: '';
     content: none;
   }
+
   table {
     border-collapse: collapse;
     border-spacing: 0;
+  }
+
+  body {
+    font-family: 'Gowun Dodum', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1;
+  }
+
+  body,
+  body *,
+  body::before,
+  body::after,
+  body *::before,
+  body *::after {
+    box-sizing: border-box;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  img {
+    vertical-align: middle;
+  }
+
+  button {
+    border-color: transparent;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  abbr[title] {
+    cursor: help;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  }
+
+  path {
+    pointer-events: none;
   }
 `;
 
