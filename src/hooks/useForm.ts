@@ -26,7 +26,10 @@ function useForm({ initialFormValues, submittingFunction }: Props) {
     const target = event.target as HTMLInputElement;
 
     setFormInputValues((previousValues) => ({ ...previousValues, [target.name]: target.value }));
-    setErrors(validateForm(formInputValues, errors, target.name));
+
+    setErrors(
+      validateForm({ ...formInputValues, [target.name]: target.value }, errors, target.name)
+    );
   };
 
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
