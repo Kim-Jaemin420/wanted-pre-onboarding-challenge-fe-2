@@ -1,4 +1,4 @@
-import { SignupFieldError } from '@/types';
+import { AuthError } from '@/types';
 import { css } from '@emotion/react';
 import { TextField } from '@mui/material';
 import { InputContainer, SubmitButton, ErrorMessage } from './signupFormStyle';
@@ -6,10 +6,10 @@ import { InputContainer, SubmitButton, ErrorMessage } from './signupFormStyle';
 interface Props {
   handleSubmitForm: React.FormEventHandler<HTMLFormElement>;
   handleChangeForm: React.FormEventHandler<HTMLFormElement>;
-  error: SignupFieldError;
+  errors: AuthError;
 }
 
-function SignupForm({ handleSubmitForm, handleChangeForm, error }: Props) {
+function SignupForm({ handleSubmitForm, handleChangeForm, errors }: Props) {
   return (
     <form
       css={css`
@@ -36,9 +36,9 @@ function SignupForm({ handleSubmitForm, handleChangeForm, error }: Props) {
           label="email"
           placeholder="email"
           fullWidth
-          error={!!error.emailErrorMessage}
+          error={!!errors.email}
         />
-        <ErrorMessage>{error.emailErrorMessage}</ErrorMessage>
+        <ErrorMessage>{errors.email}</ErrorMessage>
       </InputContainer>
       <InputContainer>
         <TextField
@@ -49,9 +49,9 @@ function SignupForm({ handleSubmitForm, handleChangeForm, error }: Props) {
           label="Password"
           type="password"
           fullWidth
-          error={!!error.passwordErrorMessage}
+          error={!!errors.password}
         />
-        <ErrorMessage>{error.passwordErrorMessage}</ErrorMessage>
+        <ErrorMessage>{errors.password}</ErrorMessage>
       </InputContainer>
       <InputContainer>
         <TextField
@@ -62,18 +62,18 @@ function SignupForm({ handleSubmitForm, handleChangeForm, error }: Props) {
           label="PasswordConfirm"
           type="password"
           fullWidth
-          error={!!error.passwordConfirmErrorMessage}
+          error={!!errors.passwordConfirm}
         />
-        <ErrorMessage>{error.passwordConfirmErrorMessage}</ErrorMessage>
+        <ErrorMessage>{errors.passwordConfirm}</ErrorMessage>
       </InputContainer>
       <SubmitButton
         type="submit"
         variant="outlined"
         name="submit"
         disabled={
-          error.emailErrorMessage !== null ||
-          error.passwordErrorMessage !== null ||
-          error.passwordConfirmErrorMessage !== null
+          typeof errors.email === 'string' ||
+          typeof errors.password === 'string' ||
+          typeof errors.passwordConfirm === 'string'
         }
         disableElevation
       >
