@@ -20,8 +20,7 @@ function SigninForm({ handleChangeForm, handleSubmitForm, errors }: Props) {
     >
       <legend
         css={css`
-          font-size: 18px;
-          margin-bottom: 20px;
+          margin-bottom: 2rem;
           text-align: center;
         `}
       >
@@ -31,6 +30,7 @@ function SigninForm({ handleChangeForm, handleSubmitForm, errors }: Props) {
         <TextField
           required
           variant="outlined"
+          sx={{ label: { fontSize: '1.2rem' } }}
           id="email"
           name="email"
           label="email"
@@ -44,6 +44,7 @@ function SigninForm({ handleChangeForm, handleSubmitForm, errors }: Props) {
         <TextField
           required
           variant="outlined"
+          sx={{ label: { fontSize: '1.2rem' } }}
           id="password"
           name="password"
           label="Password"
