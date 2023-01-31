@@ -139,6 +139,7 @@ const reset = css`
 
   body {
     font-family: 'Gowun Dodum', sans-serif;
+    font-size: 1.8rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1;
