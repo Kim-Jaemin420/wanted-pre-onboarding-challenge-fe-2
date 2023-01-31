@@ -31,6 +31,7 @@ function SignupForm({ handleSubmitForm, handleChangeForm, errors }: Props) {
         <TextField
           required
           variant="outlined"
+          sx={{ label: { fontSize: '1.2rem' } }}
           id="email"
           name="email"
           label="email"
@@ -44,6 +45,7 @@ function SignupForm({ handleSubmitForm, handleChangeForm, errors }: Props) {
         <TextField
           required
           variant="outlined"
+          sx={{ label: { fontSize: '1.2rem' } }}
           id="password"
           name="password"
           label="Password"
@@ -57,6 +59,7 @@ function SignupForm({ handleSubmitForm, handleChangeForm, errors }: Props) {
         <TextField
           required
           variant="outlined"
+          sx={{ label: { fontSize: '1.2rem' } }}
           id="passwordConfirm"
           name="passwordConfirm"
           label="PasswordConfirm"
