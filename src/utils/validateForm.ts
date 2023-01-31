@@ -44,9 +44,11 @@ const validatePasswords = (password: string, errors: AuthError, passwordConfirm?
 
 export const validateForm = (
   formInputValues: AuthField,
-  errors: AuthError,
+  errorsState: AuthError,
   targetName?: string
 ) => {
+  let errors = { ...errorsState };
+
   if (targetName === 'email') {
     errors = validateEmail(formInputValues.email, errors);
   }
