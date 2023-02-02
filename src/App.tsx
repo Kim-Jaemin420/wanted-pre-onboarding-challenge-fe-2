@@ -1,7 +1,7 @@
 import { ReactNode, useContext } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthContext } from './context';
-import { Signin, Signup } from './pages';
+import { Signin, Signup, Todos } from './pages';
 import { PAGE_ROUTE } from './consts';
 
 const RequiredAuth = ({
@@ -25,6 +25,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route
+          path={PAGE_ROUTE.HOME}
+          element={
+            <RequiredAuth hasToken={!!token} to={PAGE_ROUTE.SIGNIN}>
+              <Todos />
+            </RequiredAuth>
+          }
+        />
         <Route
           path={PAGE_ROUTE.SIGNIN}
           element={
