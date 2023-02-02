@@ -13,6 +13,7 @@ declare module '@emotion/react' {
 export const muiTheme = createTheme({
   typography: {
     fontFamily: 'Gowun Dodum, sans-serif',
+    fontSize: 18,
   },
 });
 
