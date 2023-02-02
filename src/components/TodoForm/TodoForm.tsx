@@ -2,7 +2,6 @@ import React from 'react';
 import { AxiosError } from 'axios';
 import { css } from '@emotion/react';
 import { createTodo } from '@/apis';
-import { a11yHidden } from '@/styles';
 import { TodoDetailInput, AddButton, TodoInput } from './todoFormStyle';
 
 function TodoForm() {
@@ -30,7 +29,14 @@ function TodoForm() {
       `}
       onSubmit={handleSubmitForm}
     >
-      <legend css={a11yHidden}>todo 작성하기</legend>
+      <legend
+        css={css`
+          text-align: center;
+          margin-bottom: 4rem;
+        `}
+      >
+        오늘의 할 일
+      </legend>
       <div
         css={css`
           padding: 0 3rem;
