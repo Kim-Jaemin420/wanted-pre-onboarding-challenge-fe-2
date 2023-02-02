@@ -1,11 +1,25 @@
-import { HTTP_METHODS } from '@/consts';
-import axios, { AxiosInstance, AxiosRequestConfig, Method } from 'axios';
+import { ACCESS_TOKEN, HTTP_METHODS } from '@/consts';
+import { AuthContext } from '@/context';
+import { getLocalStorage } from '@/utils';
+import axios, { AxiosHeaders, AxiosInstance, AxiosRequestConfig, Method } from 'axios';
+import { useContext } from 'react';
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' },
 });
+
+axiosInstance.interceptors.request.use(
+  async (config) => {
+    const token = await getLocalStorage(ACCESS_TOKEN);
+
+    if (config.headers) (config.headers as AxiosHeaders).set('Authorization', token);
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 const createApiMethod =
   (axiosInstance: AxiosInstance, method: Method) => (config: AxiosRequestConfig) => {
