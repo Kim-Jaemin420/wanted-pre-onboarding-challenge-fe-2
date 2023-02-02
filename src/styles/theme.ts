@@ -1,7 +1,25 @@
+import { Theme } from '@emotion/react';
 import { createTheme } from '@mui/material/styles';
+declare module '@emotion/react' {
+  export interface Theme {
+    colors: {
+      primary: string;
+      secondary: string;
+      neutrual: string;
+    };
+  }
+}
 
 export const muiTheme = createTheme({
   typography: {
     fontFamily: 'Gowun Dodum, sans-serif',
   },
 });
+
+export const theme: Theme = {
+  colors: {
+    primary: '#0080ff',
+    secondary: '#ff7f00',
+    neutrual: '#c0c0c0',
+  },
+};
