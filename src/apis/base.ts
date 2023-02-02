@@ -1,8 +1,6 @@
-import { ACCESS_TOKEN, HTTP_METHODS } from '@/consts';
-import { AuthContext } from '@/context';
-import { getLocalStorage } from '@/utils';
 import axios, { AxiosHeaders, AxiosInstance, AxiosRequestConfig, Method } from 'axios';
-import { useContext } from 'react';
+import { getLocalStorage } from '@/utils';
+import { ACCESS_TOKEN, HTTP_METHODS } from '@/consts';
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
