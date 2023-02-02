@@ -12,5 +12,5 @@ export const TodoDetailInput = styled(TextField)`
 export const AddButton = styled(Button)`
   width: 8rem;
   font-size: 1.4rem;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 `;
