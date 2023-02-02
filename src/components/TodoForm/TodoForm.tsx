@@ -32,7 +32,7 @@ function TodoForm() {
       <legend
         css={css`
           text-align: center;
-          margin-bottom: 4rem;
+          margin-bottom: 3rem;
         `}
       >
         오늘의 할 일
