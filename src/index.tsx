@@ -4,12 +4,12 @@ import { Global } from '@emotion/react';
 import { ThemeProvider } from '@mui/material';
 import { AuthProvider } from './context';
 import App from './App';
-import { reset, muiTheme } from './styles';
+import { reset, muiTheme, theme } from './styles';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Global styles={reset} />
-    <ThemeProvider theme={muiTheme}>
+    <ThemeProvider theme={{ ...muiTheme, ...theme }}>
       <AuthProvider>
         <App />
       </AuthProvider>
