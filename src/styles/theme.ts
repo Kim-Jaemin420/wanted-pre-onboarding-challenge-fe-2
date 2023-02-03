@@ -6,6 +6,7 @@ declare module '@emotion/react' {
       primary: string;
       secondary: string;
       neutrual: string;
+      neutrual2: string;
     };
   }
 }
@@ -22,5 +23,6 @@ export const theme: Theme = {
     primary: '#0080ff',
     secondary: '#ff7f00',
     neutrual: '#c0c0c0',
+    neutrual2: '#808080',
   },
 };
