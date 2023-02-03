@@ -6,3 +6,8 @@ export const createTodo = ({ title, content }: Todo) =>
     url: '/todos',
     data: { title, content },
   });
+
+export const getTodos = () =>
+  api.get({
+    url: '/todos',
+  });
