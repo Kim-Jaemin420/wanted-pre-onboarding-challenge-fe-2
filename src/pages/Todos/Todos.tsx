@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { TodoForm } from '@/components';
+import { TodoForm, TodoList } from '@/components';
 import { TodoFormContainer, TodosContainer } from './todosStyle';
 
 function Todos() {
@@ -18,7 +18,9 @@ function Todos() {
         <TodoForm />
       </TodoFormContainer>
 
-      <TodosContainer></TodosContainer>
+      <TodosContainer>
+        <TodoList />
+      </TodosContainer>
     </div>
   );
 }
