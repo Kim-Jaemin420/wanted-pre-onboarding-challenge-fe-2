@@ -22,6 +22,9 @@ function TodoForm({ setTodos }: Props) {
       });
 
       setTodos((todos) => [...todos, data.data]);
+
+      todoTitle.value = '';
+      content.value = '';
     } catch (error) {
       if (error instanceof AxiosError) {
         console.error(error);
