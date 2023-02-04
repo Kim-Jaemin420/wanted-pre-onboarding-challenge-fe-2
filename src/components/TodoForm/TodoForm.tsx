@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { AxiosError } from 'axios';
 import { css } from '@emotion/react';
 import { createTodo } from '@/apis';
 import { TodoDetailInput, AddButton, TodoInput } from './todoFormStyle';
+import { Todo } from '@/types';
 
-function TodoForm() {
+interface Props {
+  setTodos: Dispatch<SetStateAction<Todo[]>>;
+}
+
+function TodoForm({ setTodos }: Props) {
   const handleSubmitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const { todoTitle, content } = event.currentTarget;
 
     try {
-      await createTodo({
+      const { data } = await createTodo({
         title: todoTitle.value,
         content: content.value,
       });
+
+      setTodos((todos) => [...todos, data.data]);
     } catch (error) {
       if (error instanceof AxiosError) {
         console.error(error);
