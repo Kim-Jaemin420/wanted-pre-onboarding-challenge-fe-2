@@ -1,17 +1,17 @@
 import { TodoItem } from '@/components';
+import { Todo } from '@/types';
 import { ListContainer } from './todoListStyle';
 
-function TodoList() {
+interface Props {
+  todos: Todo[];
+}
+
+function TodoList({ todos }: Props) {
   return (
     <ListContainer>
-      <TodoItem />
-      <TodoItem />
-      <TodoItem />
-      <TodoItem />
-      <TodoItem />
-      <TodoItem />
-      <TodoItem />
-      <TodoItem />
+      {todos.map((todo) => (
+        <TodoItem key={todo.id} todo={todo} />
+      ))}
     </ListContainer>
   );
 }
