@@ -1,8 +1,27 @@
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { TodoForm, TodoList } from '@/components';
+import { getTodos } from '@/apis';
+import { Todo } from '@/types';
 import { TodoFormContainer, TodosContainer } from './todosStyle';
 
 function Todos() {
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  useEffect(() => {
+    const getTodoList = async () => {
+      try {
+        const { data } = await getTodos();
+
+        setTodos(data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getTodoList();
+  }, []);
+
   return (
     <div
       css={css`
@@ -15,11 +34,11 @@ function Todos() {
       `}
     >
       <TodoFormContainer>
-        <TodoForm />
+        <TodoForm setTodos={setTodos} />
       </TodoFormContainer>
 
       <TodosContainer>
-        <TodoList />
+        <TodoList todos={todos} />
       </TodosContainer>
     </div>
   );
