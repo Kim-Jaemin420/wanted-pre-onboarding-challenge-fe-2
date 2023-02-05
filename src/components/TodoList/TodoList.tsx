@@ -1,9 +1,10 @@
+import { Dispatch, SetStateAction } from 'react';
 import { TodoItem } from '@/components';
-import { Todo } from '@/types';
+import { TodoResponse } from '@/types';
 import { ListContainer } from './todoListStyle';
 
 interface Props {
-  todos: Todo[];
+  todos: TodoResponse[];
 }
 
 function TodoList({ todos }: Props) {

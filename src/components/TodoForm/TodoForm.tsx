@@ -2,11 +2,11 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { AxiosError } from 'axios';
 import { css } from '@emotion/react';
 import { createTodo } from '@/apis';
+import { TodoResponse } from '@/types';
 import { TodoDetailInput, AddButton, TodoInput } from './todoFormStyle';
-import { Todo } from '@/types';
 
 interface Props {
-  setTodos: Dispatch<SetStateAction<Todo[]>>;
+  setTodos: Dispatch<SetStateAction<TodoResponse[]>>;
 }
 
 function TodoForm({ setTodos }: Props) {

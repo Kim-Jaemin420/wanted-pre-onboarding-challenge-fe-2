@@ -1,11 +1,11 @@
 import { ListItemText } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { TodoResponse } from '@/types';
 import { ButtonContainer, Item, ItemButton, ItemContent, ItemTitle } from './todoItemStyle';
-import { Todo } from '@/types';
 
 interface Props {
-  todo: Todo;
+  todo: TodoResponse;
 }
 
 function TodoItem({ todo }: Props) {

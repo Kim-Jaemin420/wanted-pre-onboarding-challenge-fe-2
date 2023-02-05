@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { TodoForm, TodoList } from '@/components';
 import { getTodos } from '@/apis';
-import { Todo } from '@/types';
+import { TodoResponse } from '@/types';
 import { TodoFormContainer, TodosContainer } from './todosStyle';
 
 function Todos() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<TodoResponse[]>([]);
 
   useEffect(() => {
     const getTodoList = async () => {
