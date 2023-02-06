@@ -13,4 +13,5 @@ export const AddButton = styled(Button)`
   width: 8rem;
   font-size: 1.4rem;
   margin-top: 2rem;
+  margin-left: 1.5rem;
 `;
