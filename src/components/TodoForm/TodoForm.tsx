@@ -1,9 +1,10 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { AxiosError } from 'axios';
 import { css } from '@emotion/react';
 import { createTodo } from '@/apis';
 import { TodoRequest, TodoResponse } from '@/types';
+import { PAGE_ROUTE } from '@/consts';
 import { TodoDetailInput, AddButton, TodoInput } from './todoFormStyle';
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 }
 
 function TodoForm({ setTodos }: Props) {
+  const navigate = useNavigate();
   const { todoId } = useParams();
 
   const [todo, setTodo] = useState<TodoRequest>({
@@ -43,6 +45,10 @@ function TodoForm({ setTodos }: Props) {
         console.error(error);
       }
     }
+  };
+
+  const handleClickCloseButton = () => {
+    navigate(PAGE_ROUTE.HOME);
   };
 
   return (
@@ -94,7 +100,9 @@ function TodoForm({ setTodos }: Props) {
             <>
               <AddButton variant="outlined">수정</AddButton>
               <AddButton variant="outlined">삭제</AddButton>
-              <AddButton variant="outlined">닫기</AddButton>
+              <AddButton variant="outlined" onClick={handleClickCloseButton}>
+                닫기
+              </AddButton>
             </>
           )}
           {!todoId && (
