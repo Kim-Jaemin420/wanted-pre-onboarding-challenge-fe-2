@@ -49,6 +49,22 @@ function App() {
             </RequiredAuth>
           }
         />
+        <Route
+          path={PAGE_ROUTE.TODOS}
+          element={
+            <RequiredAuth hasToken={!!token} to={PAGE_ROUTE.SIGNIN}>
+              <Todos />
+            </RequiredAuth>
+          }
+        />
+        <Route
+          path={PAGE_ROUTE.TODO}
+          element={
+            <RequiredAuth hasToken={!!token} to={PAGE_ROUTE.SIGNIN}>
+              <Todos />
+            </RequiredAuth>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
