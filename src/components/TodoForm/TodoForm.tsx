@@ -28,18 +28,16 @@ function TodoForm({ setTodos }: Props) {
   const handleSubmitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const { todoTitle, content } = event.currentTarget;
+    const { title, content } = todo;
 
     try {
       const { data } = await createTodo({
-        title: todoTitle.value,
-        content: content.value,
+        title,
+        content,
       });
 
+      setTodo({ title: '', content: '' });
       setTodos((todos) => [...todos, data.data]);
-
-      todoTitle.value = '';
-      content.value = '';
     } catch (error) {
       if (error instanceof AxiosError) {
         console.error(error);
