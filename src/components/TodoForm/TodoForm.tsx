@@ -1,8 +1,8 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { AxiosError } from 'axios';
 import { css } from '@emotion/react';
-import { createTodo } from '@/apis';
+import { createTodo, getTodoById } from '@/apis';
 import { TodoRequest, TodoResponse } from '@/types';
 import { PAGE_ROUTE } from '@/consts';
 import { TodoDetailInput, AddButton, TodoInput } from './todoFormStyle';
@@ -19,6 +19,18 @@ function TodoForm({ setTodos }: Props) {
     title: '',
     content: '',
   });
+
+  useEffect(() => {
+    const getClickedTodo = async () => {
+      if (!todoId) return;
+
+      const { data } = await getTodoById({ id: todoId });
+
+      setTodo(data.data);
+    };
+
+    getClickedTodo();
+  }, [todoId]);
 
   const handleChangeTodo = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTodo((previousTodo) => ({
