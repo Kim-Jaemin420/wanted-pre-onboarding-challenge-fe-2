@@ -86,7 +86,7 @@ function TodoForm({ setTodos }: Props) {
       >
         <TodoInput
           label="오늘 할 일이 무엇인가요?"
-          name="todoTitle"
+          name="title"
           variant="outlined"
           fullWidth
           value={todo.title}
