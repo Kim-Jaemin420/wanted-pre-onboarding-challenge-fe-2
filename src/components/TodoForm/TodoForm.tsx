@@ -60,6 +60,7 @@ function TodoForm({ setTodos }: Props) {
   };
 
   const handleClickCloseButton = () => {
+    setTodo({ title: '', content: '' });
     navigate(PAGE_ROUTE.HOME);
   };
 
