@@ -12,7 +12,21 @@ export const getTodos = () =>
     url: '/todos',
   });
 
-export const getTodoById = ({ id }: { id: string | undefined }) =>
+export const getTodoById = ({ id }: { id: string }) =>
   api.get({
     url: `/todos/${id}`,
+  });
+
+export const updateTodo = ({
+  id,
+  title,
+  content,
+}: {
+  id: string;
+  title: string;
+  content: string;
+}) =>
+  api.put({
+    url: `/todos/${id}`,
+    data: { title, content },
   });
