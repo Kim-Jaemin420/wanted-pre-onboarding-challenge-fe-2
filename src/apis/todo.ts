@@ -11,3 +11,8 @@ export const getTodos = () =>
   api.get({
     url: '/todos',
   });
+
+export const getTodoById = ({ id }: { id: string | undefined }) =>
+  api.get({
+    url: `/todos/${id}`,
+  });
