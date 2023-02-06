@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
+import { useParams } from 'react-router';
 import { AxiosError } from 'axios';
 import { css } from '@emotion/react';
 import { createTodo } from '@/apis';
@@ -10,6 +11,8 @@ interface Props {
 }
 
 function TodoForm({ setTodos }: Props) {
+  const { todoId } = useParams();
+
   const handleSubmitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -68,9 +71,18 @@ function TodoForm({ setTodos }: Props) {
             text-align: right;
           `}
         >
-          <AddButton variant="outlined" type="submit">
-            추가
-          </AddButton>
+          {todoId && (
+            <>
+              <AddButton variant="outlined">수정</AddButton>
+              <AddButton variant="outlined">삭제</AddButton>
+              <AddButton variant="outlined">닫기</AddButton>
+            </>
+          )}
+          {!todoId && (
+            <AddButton variant="outlined" type="submit">
+              추가
+            </AddButton>
+          )}
         </div>
       </div>
     </form>
