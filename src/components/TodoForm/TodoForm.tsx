@@ -1,9 +1,9 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useParams } from 'react-router';
 import { AxiosError } from 'axios';
 import { css } from '@emotion/react';
 import { createTodo } from '@/apis';
-import { TodoResponse } from '@/types';
+import { TodoRequest, TodoResponse } from '@/types';
 import { TodoDetailInput, AddButton, TodoInput } from './todoFormStyle';
 
 interface Props {
@@ -12,6 +12,18 @@ interface Props {
 
 function TodoForm({ setTodos }: Props) {
   const { todoId } = useParams();
+
+  const [todo, setTodo] = useState<TodoRequest>({
+    title: '',
+    content: '',
+  });
+
+  const handleChangeTodo = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTodo((previousTodo) => ({
+      ...previousTodo,
+      [event.target.name]: event.target.value,
+    }));
+  };
 
   const handleSubmitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,7 +67,14 @@ function TodoForm({ setTodos }: Props) {
           padding: 0 3rem;
         `}
       >
-        <TodoInput label="오늘 할 일이 무엇인가요?" name="todoTitle" variant="outlined" fullWidth />
+        <TodoInput
+          label="오늘 할 일이 무엇인가요?"
+          name="todoTitle"
+          variant="outlined"
+          fullWidth
+          value={todo.title}
+          onChange={handleChangeTodo}
+        />
         <TodoDetailInput
           id="outlined-multiline-static"
           label="할 일에 대한 설명을 적어주세요."
@@ -64,6 +83,8 @@ function TodoForm({ setTodos }: Props) {
           rows={18}
           variant="outlined"
           fullWidth
+          value={todo.content}
+          onChange={handleChangeTodo}
         />
 
         <div
