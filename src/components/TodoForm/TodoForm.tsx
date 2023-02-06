@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { AxiosError } from 'axios';
 import { css } from '@emotion/react';
-import { createTodo, getTodoById } from '@/apis';
+import { createTodo, getTodoById, updateTodo } from '@/apis';
 import { TodoRequest, TodoResponse } from '@/types';
 import { PAGE_ROUTE } from '@/consts';
 import { TodoDetailInput, AddButton, TodoInput } from './todoFormStyle';
@@ -59,6 +59,18 @@ function TodoForm({ setTodos }: Props) {
     }
   };
 
+  const handleClickEditButton = async () => {
+    if (!todoId) return;
+
+    try {
+      const { data } = await updateTodo({ id: todoId, title: todo.title, content: todo.content });
+
+      setTodos((todos) => todos.map((todo) => (todo.id === todoId ? data.data : todo)));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleClickCloseButton = () => {
     setTodo({ title: '', content: '' });
     navigate(PAGE_ROUTE.HOME);
@@ -111,7 +123,9 @@ function TodoForm({ setTodos }: Props) {
         >
           {todoId && (
             <>
-              <AddButton variant="outlined">수정</AddButton>
+              <AddButton variant="outlined" onClick={handleClickEditButton}>
+                수정
+              </AddButton>
               <AddButton variant="outlined">삭제</AddButton>
               <AddButton variant="outlined" onClick={handleClickCloseButton}>
                 닫기
