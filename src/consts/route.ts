@@ -3,4 +3,5 @@ export const PAGE_ROUTE = {
   SIGNUP: '/auth/signup',
   SIGNIN: '/auth/signin',
   TODOS: '/todos,',
+  TODO: '/todos/:todoId',
 } as const;
