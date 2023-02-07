@@ -38,7 +38,7 @@ function Todos() {
       </TodoFormContainer>
 
       <TodosContainer>
-        <TodoList todos={todos} />
+        <TodoList todos={todos} setTodos={setTodos} />
       </TodosContainer>
     </div>
   );

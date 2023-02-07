@@ -5,13 +5,14 @@ import { ListContainer } from './todoListStyle';
 
 interface Props {
   todos: TodoResponse[];
+  setTodos: Dispatch<SetStateAction<TodoResponse[]>>;
 }
 
-function TodoList({ todos }: Props) {
+function TodoList({ todos, setTodos }: Props) {
   return (
     <ListContainer>
       {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
+        <TodoItem key={todo.id} todo={todo} setTodos={setTodos} />
       ))}
     </ListContainer>
   );
