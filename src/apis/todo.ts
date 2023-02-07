@@ -30,3 +30,8 @@ export const updateTodo = ({
     url: `/todos/${id}`,
     data: { title, content },
   });
+
+export const deleteTodo = ({ id }: { id: string }) =>
+  api.delete({
+    url: `/todos/${id}`,
+  });
