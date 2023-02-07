@@ -25,9 +25,14 @@ function TodoForm({ setTodos }: Props) {
 
   useEffect(() => {
     const getClickedTodo = async () => {
-      const { data } = await getTodoById({ id: todoId });
+      try {
+        if (!todoId) return;
+        const { data } = await getTodoById({ id: todoId });
 
-      setTodo(data.data);
+        setTodo(data.data);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     getClickedTodo();
