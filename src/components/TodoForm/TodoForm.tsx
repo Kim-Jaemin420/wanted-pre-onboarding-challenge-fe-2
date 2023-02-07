@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { Params, useNavigate, useParams } from 'react-router';
 import { AxiosError } from 'axios';
 import { css } from '@emotion/react';
 import { createTodo, getTodoById, updateTodo } from '@/apis';
@@ -7,13 +7,16 @@ import { TodoRequest, TodoResponse } from '@/types';
 import { PAGE_ROUTE } from '@/consts';
 import { TodoDetailInput, AddButton, TodoInput } from './todoFormStyle';
 
+interface QueryParamTypes extends Params {
+  todoId: string;
+}
 interface Props {
   setTodos: Dispatch<SetStateAction<TodoResponse[]>>;
 }
 
 function TodoForm({ setTodos }: Props) {
   const navigate = useNavigate();
-  const { todoId } = useParams();
+  const { todoId } = useParams() as QueryParamTypes;
 
   const [todo, setTodo] = useState<TodoRequest>({
     title: '',
@@ -22,8 +25,6 @@ function TodoForm({ setTodos }: Props) {
 
   useEffect(() => {
     const getClickedTodo = async () => {
-      if (!todoId) return;
-
       const { data } = await getTodoById({ id: todoId });
 
       setTodo(data.data);
@@ -60,8 +61,6 @@ function TodoForm({ setTodos }: Props) {
   };
 
   const handleClickEditButton = async () => {
-    if (!todoId) return;
-
     try {
       const { data } = await updateTodo({ id: todoId, title: todo.title, content: todo.content });
 
