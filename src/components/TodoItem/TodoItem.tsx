@@ -16,7 +16,11 @@ interface Props {
 function TodoItem({ todo, setTodos }: Props) {
   const navigate = useNavigate();
 
-  const handleClickTodoItem = () => {
+  const handleClickTodoItem = (event: React.MouseEvent<HTMLLIElement>) => {
+    const buttonElement = event.target as HTMLButtonElement;
+
+    if (buttonElement.name === 'deleteButton') return;
+
     navigate(`${PAGE_ROUTE.TODOS}/${todo.id}`);
   };
 
