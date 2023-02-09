@@ -2,17 +2,15 @@ import { Dispatch, SetStateAction } from 'react';
 import { TodoItem } from '@/components';
 import { TodoResponse } from '@/types';
 import { ListContainer } from './todoListStyle';
+import { useGetTodos } from '@/hooks';
 
-interface Props {
-  todos: TodoResponse[];
-  setTodos: Dispatch<SetStateAction<TodoResponse[]>>;
-}
+function TodoList() {
+  const { todos } = useGetTodos();
 
-function TodoList({ todos, setTodos }: Props) {
   return (
     <ListContainer>
-      {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} setTodos={setTodos} />
+      {todos.data.map((todo: TodoResponse) => (
+        <TodoItem key={todo.id} todo={todo} />
       ))}
     </ListContainer>
   );
