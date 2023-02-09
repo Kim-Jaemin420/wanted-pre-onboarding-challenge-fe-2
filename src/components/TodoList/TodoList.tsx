@@ -1,8 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
 import { TodoItem } from '@/components';
+import { useGetTodos } from '@/hooks';
 import { TodoResponse } from '@/types';
 import { ListContainer } from './todoListStyle';
-import { useGetTodos } from '@/hooks';
 
 function TodoList() {
   const { todos } = useGetTodos();
