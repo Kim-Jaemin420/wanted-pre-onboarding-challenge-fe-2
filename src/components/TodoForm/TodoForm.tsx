@@ -3,7 +3,7 @@ import { Params, useNavigate, useParams } from 'react-router';
 import { AxiosError } from 'axios';
 import { css } from '@emotion/react';
 import { createTodo, getTodoById, updateTodo } from '@/apis';
-import { TodoRequest, TodoResponse } from '@/types';
+import { CreateTodoRequest, TodoResponse } from '@/types';
 import { PAGE_ROUTE } from '@/consts';
 import { TodoDetailInput, AddButton, TodoInput } from './todoFormStyle';
 
@@ -18,7 +18,7 @@ function TodoForm({ setTodos }: Props) {
   const navigate = useNavigate();
   const { todoId } = useParams() as QueryParamTypes;
 
-  const [todo, setTodo] = useState<TodoRequest>({
+  const [todo, setTodo] = useState<CreateTodoRequest>({
     title: '',
     content: '',
   });
@@ -39,7 +39,7 @@ function TodoForm({ setTodos }: Props) {
   }, [todoId]);
 
   const handleChangeTodo = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTodo((previousTodo) => ({
+    setTodo((previousTodo: CreateTodoRequest) => ({
       ...previousTodo,
       [event.target.name]: event.target.value,
     }));

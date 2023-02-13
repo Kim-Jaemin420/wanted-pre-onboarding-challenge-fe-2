@@ -1,4 +1,4 @@
-export interface TodoRequest {
+export interface CreateTodoRequest {
   title: string;
   content: string;
 }

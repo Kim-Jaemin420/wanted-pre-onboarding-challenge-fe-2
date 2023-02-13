@@ -1,7 +1,7 @@
 import api from './base';
-import { TodoRequest } from '@/types';
+import { CreateTodoRequest } from '@/types';
 
-export const createTodo = ({ title, content }: TodoRequest) =>
+export const createTodo = ({ title, content }: CreateTodoRequest) =>
   api.post({
     url: '/todos',
     data: { title, content },
