@@ -1,5 +1,5 @@
 import api from './base';
-import { CreateTodoRequest } from '@/types';
+import { CreateTodoRequest, UpdateTodoRequest } from '@/types';
 
 export const createTodo = ({ title, content }: CreateTodoRequest) =>
   api.post({
@@ -17,15 +17,7 @@ export const getTodoById = ({ id }: { id: string }) =>
     url: `/todos/${id}`,
   });
 
-export const updateTodo = ({
-  id,
-  title,
-  content,
-}: {
-  id: string;
-  title: string;
-  content: string;
-}) =>
+export const updateTodo = ({ id, title, content }: UpdateTodoRequest) =>
   api.put({
     url: `/todos/${id}`,
     data: { title, content },
