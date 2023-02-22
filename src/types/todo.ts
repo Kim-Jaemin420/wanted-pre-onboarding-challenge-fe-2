@@ -3,6 +3,10 @@ export interface CreateTodoRequest {
   content: string;
 }
 
+export interface UpdateTodoRequest extends CreateTodoRequest {
+  id: string;
+}
+
 export interface TodoResponse {
   title: string;
   content: string;
