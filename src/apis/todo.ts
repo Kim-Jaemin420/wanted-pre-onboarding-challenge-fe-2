@@ -8,9 +8,11 @@ export const createTodo = ({ title, content }: CreateTodoRequest) =>
   });
 
 export const getTodos = () =>
-  api.get({
-    url: '/todos',
-  });
+  api
+    .get({
+      url: '/todos',
+    })
+    .then((response) => response.data.data);
 
 export const getTodoById = ({ id }: { id: string }) =>
   api.get({
