@@ -10,7 +10,7 @@ const useGetTodos = () => {
   });
 
   return {
-    todos: data ? data.data : [],
+    todos: data ?? [],
     isLoading,
     error,
   };
