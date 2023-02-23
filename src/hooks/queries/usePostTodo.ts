@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createTodo } from '@/apis';
-import { TODO_KEYS } from '@/consts/query';
+import { TODO_KEYS } from '@/consts';
 import { CreateTodoRequest } from '@/types';
 
 const usePostTodo = () => {
