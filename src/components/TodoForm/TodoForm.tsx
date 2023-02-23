@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Params, useNavigate, useParams } from 'react-router';
-import { AxiosError } from 'axios';
 import { css } from '@emotion/react';
+import { usePostTodo } from '@/hooks';
 import { createTodo, getTodoById, updateTodo } from '@/apis';
 import { CreateTodoRequest, TodoResponse } from '@/types';
 import { PAGE_ROUTE } from '@/consts';
@@ -17,6 +17,8 @@ interface Props {
 function TodoForm({ setTodos }: Props) {
   const navigate = useNavigate();
   const { todoId } = useParams() as QueryParamTypes;
+
+  const { mutate, isSuccess } = usePostTodo();
 
   const [todo, setTodo] = useState<CreateTodoRequest>({
     title: '',
@@ -49,19 +51,10 @@ function TodoForm({ setTodos }: Props) {
     event.preventDefault();
 
     const { title, content } = todo;
+    mutate({ title, content });
 
-    try {
-      const { data } = await createTodo({
-        title,
-        content,
-      });
-
+    if (isSuccess) {
       setTodo({ title: '', content: '' });
-      setTodos((todos) => [...todos, data.data]);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.error(error);
-      }
     }
   };
 
