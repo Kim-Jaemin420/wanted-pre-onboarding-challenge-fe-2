@@ -1,18 +1,22 @@
 import api from './base';
+import { throwError } from '@/utils';
 import { CreateTodoRequest, UpdateTodoRequest } from '@/types';
 
 export const createTodo = ({ title, content }: CreateTodoRequest) =>
-  api.post({
-    url: '/todos',
-    data: { title, content },
-  });
+  api
+    .post({
+      url: '/todos',
+      data: { title, content },
+    })
+    .catch(throwError);
 
 export const getTodos = () =>
   api
     .get({
       url: '/todos',
     })
-    .then((response) => response.data.data);
+    .then((response) => response.data.data)
+    .catch(throwError);
 
 export const getTodoById = ({ id }: { id: string }) =>
   api.get({
