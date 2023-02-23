@@ -19,9 +19,12 @@ export const getTodos = () =>
     .catch(throwError);
 
 export const getTodoById = ({ id }: { id: string }) =>
-  api.get({
-    url: `/todos/${id}`,
-  });
+  api
+    .get({
+      url: `/todos/${id}`,
+    })
+    .then((response) => response.data.data)
+    .catch(throwError);
 
 export const updateTodo = ({ id, title, content }: UpdateTodoRequest) =>
   api.put({
