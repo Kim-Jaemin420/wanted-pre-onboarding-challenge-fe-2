@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Params, useNavigate, useParams } from 'react-router';
 import { css } from '@emotion/react';
-import { usePostTodo } from '@/hooks';
-import { createTodo, getTodoById, updateTodo } from '@/apis';
+import { usePostTodo, useGetTodoById } from '@/hooks';
+import { updateTodo } from '@/apis';
 import { CreateTodoRequest, TodoResponse } from '@/types';
 import { PAGE_ROUTE } from '@/consts';
 import { TodoDetailInput, AddButton, TodoInput } from './todoFormStyle';
@@ -19,6 +19,7 @@ function TodoForm({ setTodos }: Props) {
   const { todoId } = useParams() as QueryParamTypes;
 
   const { mutate, isSuccess } = usePostTodo();
+  const { todoById } = useGetTodoById(todoId);
 
   const [todo, setTodo] = useState<CreateTodoRequest>({
     title: '',
@@ -26,19 +27,10 @@ function TodoForm({ setTodos }: Props) {
   });
 
   useEffect(() => {
-    const getClickedTodo = async () => {
-      try {
-        if (!todoId) return;
-        const { data } = await getTodoById({ id: todoId });
+    if (!todoById) return;
 
-        setTodo(data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getClickedTodo();
-  }, [todoId]);
+    setTodo({ title: todoById.title, content: todoById.content });
+  }, [todoById]);
 
   const handleChangeTodo = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTodo((previousTodo: CreateTodoRequest) => ({
