@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getTodos } from '@/apis';
-import { TODO_KEYS } from '@/consts/query';
+import { TODO_KEYS } from '@/consts';
 
 const useGetTodos = () => {
   const { data, isLoading, error } = useQuery({
