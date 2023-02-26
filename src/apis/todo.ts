@@ -33,6 +33,8 @@ export const updateTodo = ({ id, title, content }: UpdateTodoRequest) =>
   });
 
 export const deleteTodo = ({ id }: { id: string }) =>
-  api.delete({
-    url: `/todos/${id}`,
-  });
+  api
+    .delete({
+      url: `/todos/${id}`,
+    })
+    .catch(throwError);
