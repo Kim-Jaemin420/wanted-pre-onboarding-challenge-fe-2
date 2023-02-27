@@ -27,10 +27,13 @@ export const getTodoById = ({ id }: { id: string }) =>
     .catch(throwError);
 
 export const updateTodo = ({ id, title, content }: UpdateTodoRequest) =>
-  api.put({
-    url: `/todos/${id}`,
-    data: { title, content },
-  });
+  api
+    .put({
+      url: `/todos/${id}`,
+      data: { title, content },
+    })
+    .then((response) => response.data.data)
+    .catch(throwError);
 
 export const deleteTodo = ({ id }: { id: string }) =>
   api
