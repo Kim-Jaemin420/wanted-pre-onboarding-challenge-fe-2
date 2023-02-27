@@ -1,25 +1,22 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Params, useNavigate, useParams } from 'react-router';
 import { css } from '@emotion/react';
-import { usePostTodo, useGetTodoById } from '@/hooks';
-import { updateTodo } from '@/apis';
-import { CreateTodoRequest, TodoResponse } from '@/types';
+import { usePostTodo, useGetTodoById, usePatchTodo } from '@/hooks';
+import { CreateTodoRequest } from '@/types';
 import { PAGE_ROUTE } from '@/consts';
 import { TodoDetailInput, AddButton, TodoInput } from './todoFormStyle';
 
 interface QueryParamTypes extends Params {
   todoId: string;
 }
-interface Props {
-  setTodos: Dispatch<SetStateAction<TodoResponse[]>>;
-}
 
-function TodoForm({ setTodos }: Props) {
+function TodoForm() {
   const navigate = useNavigate();
   const { todoId } = useParams() as QueryParamTypes;
 
   const { mutate, isSuccess } = usePostTodo();
   const { todoById } = useGetTodoById(todoId);
+  const patchTodo = usePatchTodo();
 
   const [todo, setTodo] = useState<CreateTodoRequest>({
     title: '',
@@ -50,14 +47,10 @@ function TodoForm({ setTodos }: Props) {
     }
   };
 
-  const handleClickEditButton = async () => {
-    try {
-      const { data } = await updateTodo({ id: todoId, title: todo.title, content: todo.content });
+  const handleClickEditButton = () => {
+    patchTodo.mutate({ id: todoId, title: todo.title, content: todo.content });
 
-      setTodos((todos) => todos.map((todo) => (todo.id === todoId ? data.data : todo)));
-    } catch (error) {
-      console.error(error);
-    }
+    if (patchTodo.isSuccess) alert('수정이 완료되었습니다.');
   };
 
   const handleClickCloseButton = () => {
