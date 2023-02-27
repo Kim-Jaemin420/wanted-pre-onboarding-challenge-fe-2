@@ -1,20 +1,20 @@
-import React, { Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router';
 import { ListItemText } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { deleteTodo } from '@/apis';
+import { useDeleteTodo } from '@/hooks';
 import { TodoResponse } from '@/types';
 import { PAGE_ROUTE } from '@/consts';
 import { ButtonContainer, Item, ItemButton, ItemContent, ItemTitle } from './todoItemStyle';
 
 interface Props {
   todo: TodoResponse;
-  setTodos: Dispatch<SetStateAction<TodoResponse[]>>;
 }
 
-function TodoItem({ todo, setTodos }: Props) {
+function TodoItem({ todo }: Props) {
   const navigate = useNavigate();
+
+  const { mutate, isSuccess } = useDeleteTodo();
 
   const handleClickTodoItem = (event: React.MouseEvent<HTMLLIElement>) => {
     const buttonElement = event.target as HTMLButtonElement;
@@ -24,16 +24,11 @@ function TodoItem({ todo, setTodos }: Props) {
     navigate(`${PAGE_ROUTE.TODOS}/${todo.id}`);
   };
 
-  const handleClickDeleteButton = async () => {
+  const handleClickDeleteButton = () => {
     const { id } = todo;
+    mutate(id);
 
-    try {
-      await deleteTodo({ id });
-
-      setTodos((todos) => todos.filter((todo) => todo.id !== id));
-    } catch (error) {
-      console.error(error);
-    }
+    if (isSuccess) alert('삭제 되었습니다.');
   };
 
   return (
