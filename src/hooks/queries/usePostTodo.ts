@@ -6,26 +6,10 @@ import { CreateTodoRequest } from '@/types';
 const usePostTodo = () => {
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading, isSuccess, error, data } = useMutation(createTodo, {
-    onMutate: async (newTodo) => {
-      await queryClient.cancelQueries({ queryKey: TODO_KEYS.lists() });
-
-      const previousTodos = queryClient.getQueryData(TODO_KEYS.lists());
-
-      await queryClient.setQueryData<Array<CreateTodoRequest>>(
-        TODO_KEYS.lists(),
-        (oldTodo) => oldTodo && [...oldTodo, newTodo]
-      );
-
-      return previousTodos;
-    },
-
-    onError: (error, newTodo, previoustTodos) => {
-      queryClient.setQueryData(TODO_KEYS.lists(), previoustTodos);
-    },
-
-    onSettled: () => {
-      queryClient.invalidateQueries(TODO_KEYS.lists());
+  const { mutate, isLoading, isSuccess, error, data } = useMutation({
+    mutationFn: ({ title, content }: CreateTodoRequest) => createTodo({ title, content }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: TODO_KEYS.lists() });
     },
   });
 
