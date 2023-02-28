@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { AuthError, AuthField } from '@/types';
 import { validateForm } from '@/utils';
+import { UseMutateFunction } from '@tanstack/react-query';
+import { AxiosResponse } from 'axios';
 
 interface Props {
   initialFormValues: AuthField;
-  submittingFunction: () => Promise<void>;
+  submittingFunction: UseMutateFunction<AxiosResponse<any, any>, unknown, AuthField, unknown>;
 }
 
 function useForm({ initialFormValues, submittingFunction }: Props) {
@@ -14,7 +16,7 @@ function useForm({ initialFormValues, submittingFunction }: Props) {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
-      submittingFunction();
+      submittingFunction(formInputValues);
     }
 
     return () => {

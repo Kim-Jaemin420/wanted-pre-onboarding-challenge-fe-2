@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { useForm, usePostSignup } from '@/hooks';
+import { useAuthForm, usePostSignup } from '@/hooks';
 import { SignupForm } from '@/components';
 
 function Signup() {
   const postSignup = usePostSignup();
 
-  const { errors, handleChangeForm, handleSubmitForm } = useForm({
+  const { errors, handleChangeForm, handleSubmitForm } = useAuthForm({
     initialFormValues: { email: '', password: '', passwordConfirm: '' },
     submittingFunction: postSignup.mutate,
   });
