@@ -1,14 +1,8 @@
-import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
-import { useGetTodos } from '@/hooks';
 import { TodoForm, TodoList } from '@/components';
-import { getTodos } from '@/apis';
-import { TodoResponse } from '@/types';
 import { TodoFormContainer, TodosContainer } from './todosStyle';
 
 function Todos() {
-  const [todos, setTodos] = useState<TodoResponse[]>([]);
-
   return (
     <div
       css={css`
@@ -21,7 +15,7 @@ function Todos() {
       `}
     >
       <TodoFormContainer>
-        <TodoForm setTodos={setTodos} />
+        <TodoForm />
       </TodoFormContainer>
 
       <TodosContainer>
