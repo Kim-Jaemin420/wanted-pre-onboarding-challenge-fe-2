@@ -6,20 +6,12 @@ import { CreateTodoRequest } from '@/types';
 const usePostTodo = () => {
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading, isSuccess, error, data } = useMutation({
+  return useMutation({
     mutationFn: ({ title, content }: CreateTodoRequest) => createTodo({ title, content }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: TODO_KEYS.lists() });
     },
   });
-
-  return {
-    mutate,
-    isLoading,
-    isSuccess,
-    error,
-    data,
-  };
 };
 
 export default usePostTodo;

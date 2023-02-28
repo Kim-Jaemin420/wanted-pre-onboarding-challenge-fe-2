@@ -14,8 +14,8 @@ function TodoForm() {
   const navigate = useNavigate();
   const { todoId } = useParams() as QueryParamTypes;
 
-  const { mutate, isSuccess } = usePostTodo();
-  const { todoById } = useGetTodoById(todoId);
+  const postTodo = usePostTodo();
+  const getTodoById = useGetTodoById(todoId);
   const patchTodo = usePatchTodo();
 
   const [todo, setTodo] = useState<CreateTodoRequest>({
@@ -24,10 +24,10 @@ function TodoForm() {
   });
 
   useEffect(() => {
-    if (!todoById) return;
+    if (!getTodoById.data) return;
 
-    setTodo({ title: todoById.title, content: todoById.content });
-  }, [todoById]);
+    setTodo({ title: getTodoById.data.title, content: getTodoById.data.content });
+  }, [getTodoById.data]);
 
   const handleChangeTodo = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTodo((previousTodo: CreateTodoRequest) => ({
@@ -40,9 +40,9 @@ function TodoForm() {
     event.preventDefault();
 
     const { title, content } = todo;
-    mutate({ title, content });
+    postTodo.mutate({ title, content });
 
-    if (isSuccess) {
+    if (postTodo.isSuccess) {
       setTodo({ title: '', content: '' });
     }
   };
