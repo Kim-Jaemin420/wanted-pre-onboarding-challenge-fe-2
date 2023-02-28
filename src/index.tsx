@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Global } from '@emotion/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from '@mui/material';
 import { AuthProvider } from './context';
 import App from './App';
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <App />
         </AuthProvider>
       </ThemeProvider>
+      <ReactQueryDevtools initialIsOpen={false} position={'bottom-left'} />
     </QueryClientProvider>
   </React.StrictMode>
 );
