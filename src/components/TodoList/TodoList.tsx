@@ -4,7 +4,7 @@ import { TodoResponse } from '@/types';
 import { ListContainer } from './todoListStyle';
 
 function TodoList() {
-  const { todos } = useGetTodos();
+  const { data: todos } = useGetTodos();
 
   return (
     <ListContainer>

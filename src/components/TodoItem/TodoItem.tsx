@@ -14,7 +14,7 @@ interface Props {
 function TodoItem({ todo }: Props) {
   const navigate = useNavigate();
 
-  const { mutate, isSuccess } = useDeleteTodo();
+  const deleteTodo = useDeleteTodo();
 
   const handleClickTodoItem = (event: React.MouseEvent<HTMLLIElement>) => {
     const buttonElement = event.target as HTMLButtonElement;
@@ -26,9 +26,9 @@ function TodoItem({ todo }: Props) {
 
   const handleClickDeleteButton = () => {
     const { id } = todo;
-    mutate(id);
+    deleteTodo.mutate(id);
 
-    if (isSuccess) alert('삭제 되었습니다.');
+    if (deleteTodo.isSuccess) alert('삭제 되었습니다.');
   };
 
   return (
