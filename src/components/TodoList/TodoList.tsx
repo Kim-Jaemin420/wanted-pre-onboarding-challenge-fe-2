@@ -8,7 +8,7 @@ function TodoList() {
 
   return (
     <ListContainer>
-      {todos.map((todo: TodoResponse) => (
+      {todos?.map((todo: TodoResponse) => (
         <TodoItem key={todo.id} todo={todo} />
       ))}
     </ListContainer>
