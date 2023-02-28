@@ -4,7 +4,7 @@ import { TODO_KEYS } from '@/consts';
 
 const useGetTodoById = (id: string) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: TODO_KEYS.detail(id),
+    queryKey: TODO_KEYS.list(id),
     queryFn: () => getTodoById({ id }),
     staleTime: 10000,
     enabled: !!id,
