@@ -5,6 +5,7 @@ declare module '@emotion/react' {
     colors: {
       primary: string;
       secondary: string;
+      secondary2: string;
       neutrual: string;
       neutrual2: string;
       background: string;
@@ -23,6 +24,7 @@ export const theme: Theme = {
   colors: {
     primary: '#0080ff',
     secondary: '#ff7f00',
+    secondary2: '#fff2e5',
     neutrual: '#c0c0c0',
     neutrual2: '#808080',
     background: '#fff',
