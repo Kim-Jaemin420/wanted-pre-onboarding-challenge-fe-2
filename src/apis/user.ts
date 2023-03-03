@@ -8,8 +8,7 @@ export const signup = ({ email, password }: User) =>
       url: '/users/create',
       data: { email, password },
     })
-    .then((response) => response.data)
-    .catch(throwError);
+    .then((response) => response.data);
 
 export const signin = ({ email, password }: User) =>
   api
@@ -17,5 +16,4 @@ export const signin = ({ email, password }: User) =>
       url: '/users/login',
       data: { email, password },
     })
-    .then((response) => response.data)
-    .catch(throwError);
+    .then((response) => response.data);
