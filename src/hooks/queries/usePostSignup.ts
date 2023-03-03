@@ -1,28 +1,28 @@
-import { useContext } from 'react';
-import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { AuthContext } from '@/context';
+import { useMutation } from '@tanstack/react-query';
+import { useModal } from '@/hooks';
 import { signup } from '@/apis';
 import { HTTP_ERRORS } from '@/consts';
 import { User } from '@/types';
 
 const usePostSignup = () => {
-  const { setToken } = useContext(AuthContext);
+  const { openModal, setModalMessage } = useModal();
 
   return useMutation({
     mutationFn: ({ email, password }: User) => signup({ email, password }),
     onError: (error) => {
       if (error instanceof AxiosError) {
         if (error.response?.status === HTTP_ERRORS.CONFLICT) {
-          alert(error.response.data.details);
+          openModal();
+          setModalMessage(error.response.data.details);
         }
 
         console.error(error);
       }
     },
     onSuccess: (data) => {
-      setToken(data.token);
-      alert(data.message);
+      openModal();
+      setModalMessage(data.message);
     },
   });
 };
