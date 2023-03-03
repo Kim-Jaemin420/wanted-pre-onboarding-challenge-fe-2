@@ -17,14 +17,12 @@ function TodoItem({ todo }: Props) {
   const deleteTodo = useDeleteTodo();
 
   const handleClickTodoItem = (event: React.MouseEvent<HTMLLIElement>) => {
-    const buttonElement = event.target as HTMLButtonElement;
-
-    if (buttonElement.name === 'deleteButton') return;
-
     navigate(`${PAGE_ROUTE.TODOS}/${todo.id}`);
   };
 
-  const handleClickDeleteButton = () => {
+  const handleClickDeleteButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+
     const { id } = todo;
     deleteTodo.mutate(id);
 
