@@ -1,14 +1,21 @@
+import { useContext } from 'react';
 import { css } from '@emotion/react';
+import { AuthContext } from '@/context';
 import { useAuthForm, usePostSignup } from '@/hooks';
-import { SignupForm } from '@/components';
+import { Modal, SignupForm } from '@/components';
 
 function Signup() {
+  const { setToken } = useContext(AuthContext);
   const postSignup = usePostSignup();
 
   const { errors, handleChangeForm, handleSubmitForm } = useAuthForm({
     initialFormValues: { email: '', password: '', passwordConfirm: '' },
     submittingFunction: postSignup.mutate,
   });
+
+  const handleClickCloseModal = () => {
+    if (postSignup.isSuccess) setToken(postSignup.data.token);
+  };
 
   return (
     <div
@@ -25,6 +32,7 @@ function Signup() {
         handleChangeForm={handleChangeForm}
         errors={errors}
       />
+      <Modal handleClickCloseModal={handleClickCloseModal} />
     </div>
   );
 }
