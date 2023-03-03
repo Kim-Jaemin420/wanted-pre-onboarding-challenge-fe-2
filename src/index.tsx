@@ -4,7 +4,7 @@ import { Global } from '@emotion/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from '@mui/material';
-import { AuthProvider } from './context';
+import { AuthProvider, ModalProvider } from './context';
 import App from './App';
 import { reset, muiTheme, theme } from './styles';
 
@@ -16,7 +16,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <Global styles={reset} />
       <ThemeProvider theme={{ ...muiTheme, ...theme }}>
         <AuthProvider>
-          <App />
+          <ModalProvider>
+            <App />
+          </ModalProvider>
         </AuthProvider>
       </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} position={'bottom-left'} />
