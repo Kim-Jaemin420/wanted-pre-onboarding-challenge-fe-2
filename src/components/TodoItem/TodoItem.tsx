@@ -24,9 +24,8 @@ function TodoItem({ todo }: Props) {
     event.stopPropagation();
 
     const { id } = todo;
-    deleteTodo.mutate(id);
 
-    if (deleteTodo.isSuccess) alert('삭제 되었습니다.');
+    deleteTodo.mutate(id);
   };
 
   return (
