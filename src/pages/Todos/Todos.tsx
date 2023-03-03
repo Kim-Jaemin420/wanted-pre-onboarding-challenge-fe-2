@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { TodoForm, TodoList } from '@/components';
+import { TodoForm, TodoList, Modal } from '@/components';
 import { TodoFormContainer, TodosContainer } from './todosStyle';
 
 function Todos() {
@@ -21,6 +21,7 @@ function Todos() {
       <TodosContainer>
         <TodoList />
       </TodosContainer>
+      <Modal />
     </div>
   );
 }
