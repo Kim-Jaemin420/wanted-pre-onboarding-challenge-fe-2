@@ -9,8 +9,8 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  async (config) => {
-    const token = await getLocalStorage(ACCESS_TOKEN);
+  (config) => {
+    const token = getLocalStorage(ACCESS_TOKEN);
 
     if (config.headers) (config.headers as AxiosHeaders).set('Authorization', token);
 
